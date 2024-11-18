@@ -1,0 +1,33 @@
+<!-- templates/edit_registration.html -->
+{% extends 'layout.html' %}
+{% block body %}
+<main class="main">
+    <div class="container mt-5">
+        <h1 class="text-center">Edit Registration</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ registration.name }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{ registration.email }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" name="phone" value="{{ registration.phone }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="academic_documents" class="form-label">Update Academic Documents</label>
+                <input type="file" class="form-control" id="academic_documents" name="academic_documents" accept=".pdf,.doc,.docx,.jpg,.png">
+                <small class="form-text text-muted">Leave empty if no changes.</small>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a href="{% url 'view_registrations' %}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}

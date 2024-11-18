@@ -1,0 +1,35 @@
+<!-- templates/view_data.html -->
+{% extends 'layout.html' %}
+{% block body %}
+<main class="main">
+    <div class="container mt-5">
+        <h1 class="text-center">Course Registrations</h1>
+
+        <!-- Card View -->
+        <div class="row mt-4">
+            {% for registration in registrations %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ registration.name }}</h5>
+                        <p class="card-text">
+                            <strong>Email:</strong> {{ registration.email }}<br>
+                            <strong>Phone:</strong> {{ registration.phone }}<br>
+                            <strong>Academic Document:</strong>
+                            <a href="{{ registration.academic_documents.url }}" target="_blank">View Document</a>
+                        </p>
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'edit_registration' registration.id %}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{% url 'delete_registration' registration.id %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}
